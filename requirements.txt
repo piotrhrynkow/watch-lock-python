@@ -1,0 +1,4 @@
+colorama==0.4.3
+py2app==0.21
+PyYAML==5.3.1
+tabulate==0.8.7
