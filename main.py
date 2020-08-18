@@ -18,9 +18,9 @@ class Yaml:
         if self.data is None:
             file_path = Path(self.path)
             if not file_path.exists():
-                raise Exception('Unable to find file "{}"'.format(self.path))
+                raise Exception("Unable to find file \"{}\"".format(self.path))
             if not file_path.is_file():
-                raise Exception('Path "{}" is not file'.format(file_path.resolve()))
+                raise Exception("Path \"{}\" is not file".format(file_path.resolve()))
             stream = open(self.path, "r")
             self.data = yaml.safe_load(stream)
         return self.data
@@ -71,7 +71,7 @@ class FileFinder:
     @staticmethod
     def get_file_paths(directory: str, extension: str):
         lock_files = []
-        for file in Path(directory).glob('*/composer.' + extension):
+        for file in Path(directory).glob("*/composer." + extension):
             lock_files.append(file)
         return lock_files
 
