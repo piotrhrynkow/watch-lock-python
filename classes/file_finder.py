@@ -14,5 +14,5 @@ class FileFinder:
         return lock_files
 
     @staticmethod
-    def get_lock_path(json_path) -> Path:
-        return json_path.joinpath(json_path.parent, "composer.lock")
+    def get_lock_path(json_path: Path) -> Path:
+        return json_path.resolve().parent.joinpath("composer.lock")
