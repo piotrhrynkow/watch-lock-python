@@ -1,0 +1,15 @@
+{
+    "name": "piotrhrynkow/watch-lock",
+    "description": "Package created for testing",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Piotr Hrynkow",
+            "email": "piotr.hrynkow@gmail.com"
+        }
+    ],
+    "require": {},
+    "require-dev": {
+        "phpunit/phpunit": "^8.5"
+    }
+}
