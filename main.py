@@ -80,7 +80,7 @@ class FileFinder:
 
     @staticmethod
     def get_lock_path(json_path) -> Path:
-        return Path.joinpath(json_path.cwd(), json_path.parent, "composer.lock")
+        return json_path.joinpath(json_path.parent, "composer.lock")
 
 
 class Matcher:
