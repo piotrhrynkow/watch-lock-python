@@ -16,6 +16,11 @@ class Yaml:
 
     def __get_data(self):
         if self.data is None:
+            file_path = Path(self.path)
+            if not file_path.exists():
+                raise Exception('Unable to find file "{}"'.format(self.path))
+            if not file_path.is_file():
+                raise Exception('Path "{}" is not file'.format(file_path.resolve()))
             stream = open(self.path, "r")
             self.data = yaml.safe_load(stream)
         return self.data
@@ -78,9 +83,9 @@ class FileFinder:
 class Matcher:
 
     @staticmethod
-    def get_matches():
+    def get_matches(config_path: str):
         matches = []
-        yaml = Yaml("config.yaml")
+        yaml = Yaml(config_path)
         for directory in yaml.get_directories():
             yaml_packages = yaml.get_packages()
             json_paths = FileFinder.get_file_paths(directory, "json")
@@ -102,7 +107,7 @@ if __name__ == '__main__':
 
     table = Table()
     table.set_header(["File", "Name", "Reference expected", "Reference actual"])
-    matches = Matcher.get_matches()
+    matches = Matcher.get_matches(args.config)
     for match in matches:
         value_type = ["source", "reference"]
         is_equal = match.is_equal(value_type)
