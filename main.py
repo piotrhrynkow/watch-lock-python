@@ -2,6 +2,7 @@ import json
 import yaml
 import glob
 from pathlib import Path
+from typing import List
 from classes.console import Console
 from classes.table import Table
 from model.match import Match
@@ -26,7 +27,7 @@ class Yaml:
             self.data = yaml.safe_load(stream)
         return self.data
 
-    def get_directories(self):
+    def get_directories(self) -> List[str]:
         data = self.__get_data()
         return data["directories"]
 
@@ -41,7 +42,7 @@ class Yaml:
 class Json:
 
     @staticmethod
-    def get_names(path: Path):
+    def get_names(path: Path) -> List[str]:
         names = []
         stream = path.open()
         data = json.loads(stream.read())
@@ -70,7 +71,7 @@ class Json:
 class FileFinder:
 
     @staticmethod
-    def get_file_paths(directory: str, extension: str):
+    def get_file_paths(directory: str, extension: str) -> List[Path]:
         lock_files = []
         lock_paths = glob.glob(directory + "/composer." + extension, recursive=True)
         for file in lock_paths:
@@ -85,7 +86,7 @@ class FileFinder:
 class Matcher:
 
     @staticmethod
-    def get_matches(config_path: str):
+    def get_matches(config_path: str) -> List[Match]:
         matches = []
         yaml = Yaml(config_path)
         for directory in yaml.get_directories():

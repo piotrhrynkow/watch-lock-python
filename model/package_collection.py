@@ -1,3 +1,7 @@
+from typing import Optional
+from model.package import Package
+
+
 class Collection:
 
     def __init__(self):
@@ -8,7 +12,7 @@ class Collection:
         self.packages_length = len(self.packages)
         return self
 
-    def __next__(self):
+    def __next__(self) -> Package:
         if self.index == self.packages_length:
             raise StopIteration
         package = self.packages[self.index]
@@ -18,7 +22,7 @@ class Collection:
     def add(self, package):
         self.packages.append(package)
 
-    def find_by_name(self, name):
+    def find_by_name(self, name) -> Optional[Package]:
         for package in self.packages:
             if package.name == name:
                 return package
