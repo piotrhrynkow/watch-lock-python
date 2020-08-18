@@ -1,5 +1,5 @@
 directories:
-  - path\to\directory
+  - path\to\directory\*
 packages:
   package-name:
     source:

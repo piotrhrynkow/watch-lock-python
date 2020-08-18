@@ -1,5 +1,6 @@
 import json
 import yaml
+import glob
 from pathlib import Path
 from classes.console import Console
 from classes.table import Table
@@ -71,8 +72,9 @@ class FileFinder:
     @staticmethod
     def get_file_paths(directory: str, extension: str):
         lock_files = []
-        for file in Path(directory).glob("*/composer." + extension):
-            lock_files.append(file)
+        lock_paths = glob.glob(directory + "/composer." + extension, recursive=True)
+        for file in lock_paths:
+            lock_files.append(Path(file))
         return lock_files
 
     @staticmethod
