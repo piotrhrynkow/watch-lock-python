@@ -1,0 +1,9 @@
+directories:
+  - './tests/data'
+packages:
+  phpunit/phpunit:
+    source:
+      reference: 34c18baa6a44f1d1fbf0338907139e9dce95b997
+  phpunit/php-code-coverage:
+    source:
+      reference: f1884187926fbb755a9aaf0b3836ad3165b478bf
