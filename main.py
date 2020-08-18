@@ -10,7 +10,7 @@ if __name__ == '__main__':
 
     table = Table()
     table.set_header(["File", "Name", "Reference expected", "Reference actual"])
-    matches = Matcher.get_matches(args.config)
+    matches = Matcher.get_json_matches(args.config) if args.json else Matcher.get_lock_matches(args.config)
     for match in matches:
         value_type = ["source", "reference"]
         is_equal = match.is_equal(value_type)
