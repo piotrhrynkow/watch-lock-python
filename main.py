@@ -1,6 +1,7 @@
 import json
+import os
 import yaml
-from pathlib import Path
+from pathlib import Path, PurePath, PurePosixPath
 from classes.console import Console
 from classes.table import Table
 from model.match import Match
@@ -91,7 +92,7 @@ class Matcher:
                         lock_path = FileFinder.get_lock_path(json_path)
                         for lock_package in Json.get_packages(lock_path.absolute()):
                             if lock_package.name == json_package_name:
-                                matches.append(Match(lock_path.parent, yaml_package, lock_package))
+                                matches.append(Match(lock_path.resolve().parent, yaml_package, lock_package))
                                 break
         return matches
 
