@@ -23,7 +23,7 @@ class Yaml:
                 raise Exception("Unable to find file \"{}\"".format(self.path))
             if not file_path.is_file():
                 raise Exception("Path \"{}\" is not file".format(file_path.resolve()))
-            stream = open(self.path, "r")
+            stream = file_path.open("r")
             self.data = yaml.safe_load(stream)
         return self.data
 
