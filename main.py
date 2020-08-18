@@ -1,7 +1,6 @@
 import json
-import os
 import yaml
-from pathlib import Path, PurePath, PurePosixPath
+from pathlib import Path
 from classes.console import Console
 from classes.table import Table
 from model.match import Match
