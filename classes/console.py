@@ -41,4 +41,4 @@ class Console(AbstractConsole):
         )
         questions.append(checkbox)
         answers = prompt(questions, theme=QuestionTheme())
-        return answers["packages"] if hasattr(answers, "packages") else []
+        return answers["packages"] if "packages" in answers else []
