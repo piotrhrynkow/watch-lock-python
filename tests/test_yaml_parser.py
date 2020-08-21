@@ -17,7 +17,7 @@ def test_path_is_not_file():
 def test_should_return_directories():
     yaml = YamlParser("tests/data/config.yaml")
     directories = yaml.get_directories()
-    assert directories == ['./tests/data']
+    assert directories == ["./tests/data/composer"]
 
 
 def test_should_return_packages():
@@ -26,5 +26,5 @@ def test_should_return_packages():
     package_names = []
     for package in packages:
         package_names.append(package.name)
-    assert package_names == ['phpunit/phpunit', 'phpunit/php-code-coverage']
+    assert package_names == ["phpunit/phpunit", "phpunit/php-code-coverage"]
 

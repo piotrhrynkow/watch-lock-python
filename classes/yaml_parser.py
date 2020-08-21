@@ -20,6 +20,7 @@ class YamlParser:
                 raise Exception("Path \"{}\" is not file".format(file_path.resolve()))
             stream = file_path.open("r")
             self.data = yaml.safe_load(stream)
+            stream.close()
         return self.data
 
     def get_directories(self) -> List[str]:

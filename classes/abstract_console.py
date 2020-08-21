@@ -1,13 +1,8 @@
-from abc import ABC, abstractmethod
+from abc import ABC
 from colorama import Fore, Style
 
 
 class AbstractConsole(ABC):
-
-    @staticmethod
-    @abstractmethod
-    def init():
-        pass
 
     @staticmethod
     def color(color: str, text: str) -> str:
