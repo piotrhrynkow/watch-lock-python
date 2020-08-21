@@ -1,5 +1,5 @@
 from classes.file_finder import FileFinder
-from classes.json_matcher import JsonParser
+from classes.json_parser import JsonParser
 from classes.yaml_parser import YamlParser
 from model.match import Match
 from model.package import Package
