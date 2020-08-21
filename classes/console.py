@@ -1,5 +1,8 @@
 import argparse
 from classes.abstract_console import AbstractConsole
+from classes.console_theme import QuestionTheme
+from inquirer import Checkbox, prompt
+from typing import List
 
 
 class Console(AbstractConsole):
@@ -13,9 +16,6 @@ class Console(AbstractConsole):
         type: str = parser.parse_known_args()[0].type
         self.parser: argparse.ArgumentParser = self.create_parser(True)
 
-        if self.TYPE_REPLACE == type:
-            self.replace_arguments()
-
     def create_parser(self, has_help: bool) -> argparse.ArgumentParser:
         parser = argparse.ArgumentParser(description="Find wrong references in locks", add_help=has_help)
         parser.add_argument("type", type=str, help="Type")
@@ -24,9 +24,6 @@ class Console(AbstractConsole):
         parser.add_argument("-a", "--all", action="store_true", help="Show all matches")
         return parser
 
-    def replace_arguments(self):
-        self.parser.add_argument("package", type=str, help="Package name")
-
     def get_type(self) -> str:
         return self.get_args().type
 
@@ -34,3 +31,14 @@ class Console(AbstractConsole):
         if self.args is None:
             self.args = self.parser.parse_args()
         return self.args
+
+    def select_packages(self, packages: List[str]) -> List[str]:
+        questions: List[Checkbox] = []
+        checkbox: Checkbox = Checkbox(
+            "packages",
+            message="What packages do you want to update?",
+            choices=packages
+        )
+        questions.append(checkbox)
+        answers = prompt(questions, theme=QuestionTheme())
+        return answers["packages"] if hasattr(answers, "packages") else []

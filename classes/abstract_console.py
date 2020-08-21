@@ -15,3 +15,7 @@ class AbstractConsole(ABC):
     @staticmethod
     def warning(text: str) -> str:
         return AbstractConsole.color(Fore.YELLOW, text)
+
+    @staticmethod
+    def success(text: str) -> str:
+        return AbstractConsole.color(Fore.GREEN, text)
