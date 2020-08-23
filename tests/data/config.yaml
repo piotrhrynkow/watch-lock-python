@@ -1,9 +1,13 @@
 directories:
-  - './tests/data/composer'
+- ./tests/data/composer
 packages:
   phpunit/phpunit:
+    repository: sebastianbergmann/phpunit
+    branch: master
     source:
       reference: 34c18baa6a44f1d1fbf0338907139e9dce95b997
   phpunit/php-code-coverage:
+    repository: sebastianbergmann/php-code-coverage
+    branch: master
     source:
       reference: f1884187926fbb755a9aaf0b3836ad3165b478bf

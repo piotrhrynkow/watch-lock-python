@@ -8,7 +8,8 @@ class Result:
     STATUS_WARNING = "warning"
     STATUS_FAILED = "failed"
 
-    def __init__(self):
+    def __init__(self, package: str):
+        self.package: str = package
         self.status: Optional[str] = None
         self.directory: Optional[str] = None
         self.message: Optional[str] = None

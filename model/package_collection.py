@@ -27,3 +27,11 @@ class Collection:
             if package.name == name:
                 return package
         return None
+
+    def find_by_names(self, names: List[str]) -> List[Package]:
+        packages: List[Package] = []
+        for name in names:
+            package: Optional[Package] = self.find_by_name(name)
+            if package:
+                packages.append(package)
+        return packages

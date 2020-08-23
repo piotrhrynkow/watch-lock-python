@@ -1,6 +1,7 @@
 colorama==0.4.3
 inquirer==2.7.0
 py2app==0.21
+PyGithub==1.53
 PyYAML==5.3.1
 pytest==6.0.1
 tabulate==0.8.7

@@ -1,16 +1,16 @@
-from classes.replacer import Replacer
+from classes.lock_replacer import LockReplacer
 from typing import IO
 
 
 def test_nonexistent_package():
     text: str = get_lock_fixture("composer.lock")
-    replacer: Replacer = Replacer(text)
+    replacer: LockReplacer = LockReplacer(text)
     assert replacer.find_package("piotrhrynkow/watch-lock") is False
 
 
 def test_finding_package():
     text: str = get_lock_fixture("composer.lock")
-    replacer: Replacer = Replacer(text)
+    replacer: LockReplacer = LockReplacer(text)
     assert replacer.find_package("doctrine/instantiator") is True
     assert replacer.find_package("phpunit/phpunit") is True
     assert replacer.find_package("webmozart/assert") is True
@@ -18,21 +18,21 @@ def test_finding_package():
 
 def test_replace_not_required():
     text: str = get_lock_fixture("composer.lock")
-    replacer: Replacer = Replacer(text)
+    replacer: LockReplacer = LockReplacer(text)
     replacer.find_package("phpunit/phpunit")
     assert replacer.replace_required("34c18baa6a44f1d1fbf0338907139e9dce95b997") is False
 
 
 def test_replace_required():
     text: str = get_lock_fixture("composer.lock")
-    replacer: Replacer = Replacer(text)
+    replacer: LockReplacer = LockReplacer(text)
     replacer.find_package("phpunit/phpunit")
     assert replacer.replace_required("hashneedsreplace") is True
 
 
 def test_replace_hashes():
     text: str = get_lock_fixture("composer.lock")
-    replacer: Replacer = Replacer(text)
+    replacer: LockReplacer = LockReplacer(text)
     replacer.find_package("doctrine/instantiator")
     replacer.replace("doctrineinstantiatorhash")
     replacer.find_package("phpunit/phpunit")
@@ -44,7 +44,7 @@ def test_replace_hashes():
 
 def test_replace_all():
     text: str = get_lock_fixture("composer.lock")
-    replacer: Replacer = Replacer(text)
+    replacer: LockReplacer = LockReplacer(text)
     replacer.find_package("doctrine/instantiator")
     replacer.replace("doctrineinstantiatorhash", "2050-01-01T00:00:01+00:00")
     replacer.find_package("phpunit/phpunit")

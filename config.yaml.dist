@@ -1,6 +1,12 @@
+auth:
+  token: ~
+  login: ~
+  password: ~
 directories:
-  - path\to\directory\*
+- path\to\directory\*
 packages:
   package-name:
+    repository: owner/project
+    branch: name
     source:
       reference: hash

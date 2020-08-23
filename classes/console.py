@@ -7,6 +7,7 @@ from typing import List
 
 class Console(AbstractConsole):
 
+    TYPE_FETCH = "fetch"
     TYPE_REPLACE = "replace"
     TYPE_SEARCH = "search"
 

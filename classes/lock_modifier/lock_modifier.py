@@ -1,6 +1,6 @@
 from classes.date_formater import DateFormater
 from classes.lock_modifier.result import Result
-from classes.replacer import Replacer
+from classes.lock_replacer import LockReplacer
 from classes.yaml_parser import YamlParser
 from model.match import Match
 from pathlib import Path
@@ -15,19 +15,19 @@ class LockModifier:
     def update_package(self, match: Match, fiels: List[str]) -> Result:
         lock_path: Path = match.lock_path
         package: str = match.package_x.name
-        hash: str = match.package_x.get_value(fiels)
-        result: Result = Result()
+        sha: str = match.package_x.get_value(fiels)
+        result: Result = Result(package)
         stream: Optional[IO] = None
         try:
             stream, data = self.__get_stream_with_data(lock_path)
             time: str = DateFormater.get_current_utc_datetime()
-            replacer: Replacer = Replacer(data)
+            replacer: LockReplacer = LockReplacer(data)
             if replacer.find_package(package):
                 result.directory = lock_path.resolve().parent
-                if not replacer.replace_required(hash):
-                    result.set_ignored("Current hash, no required action")
+                if not replacer.replace_required(sha):
+                    result.set_ignored("Current sha, no required action")
                 else:
-                    lock_content: str = replacer.replace(hash, time)
+                    lock_content: str = replacer.replace(sha, time)
                     length: int = self.__save_content(stream, lock_content)
                     if length == len(lock_content):
                         result.set_success()
