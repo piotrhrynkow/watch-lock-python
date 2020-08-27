@@ -14,7 +14,7 @@ class LockModifier:
 
     def update_package(self, match: Match, fiels: List[str]) -> Result:
         lock_path: Path = match.lock_path
-        package: str = match.package_x.name
+        package: str = match.package_name
         sha: str = match.package_x.get_value(fiels)
         result: Result = Result(package)
         stream: Optional[IO] = None

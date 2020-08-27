@@ -19,7 +19,7 @@ class OptionSearch(AbstractOption):
             value_y: str = match.package_y.get_value(value_type)
             table.add_row([
                 match.directory_path,
-                match.package_x.name,
+                match.package_name,
                 value_x,
                 value_y if is_equal else Console.alert(value_y)
             ])
