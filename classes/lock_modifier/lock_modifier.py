@@ -56,4 +56,4 @@ class LockModifier:
             stream.close()
 
     def __get_exception_message(self, exception: Exception) -> Optional[str]:
-        return exception.message if hasattr(exception, 'message') else None
+        return exception.message if hasattr(exception, "message") else None

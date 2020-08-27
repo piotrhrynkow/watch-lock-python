@@ -14,7 +14,7 @@ class OptionFetch(AbstractOption):
     def run(self) -> None:
         packages: List[Package] = self.yaml_parser.get_packages()
         selected_packages: List[str] = self.console.select_packages(self.get_package_names())
-        filtered_packages: List[Package] = Collection.get_single_by(packages, 'name', selected_packages)
+        filtered_packages: List[Package] = Collection.get_single_by(packages, "name", selected_packages)
         if not filtered_packages:
             print(Console.warning("No selected packages, abort"))
         else:

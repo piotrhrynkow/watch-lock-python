@@ -19,7 +19,7 @@ class PackageMatcher:
             json_paths: List[Path] = FileFinder.get_file_paths(directory, "json")
             for json_path in json_paths:
                 for json_package_name in JsonParser.get_names(json_path):
-                    yaml_package: Optional[Package] = Collection.get_single_by(yaml_packages, 'name', json_package_name)
+                    yaml_package: Optional[Package] = Collection.get_single_by(yaml_packages, "name", json_package_name)
                     if yaml_package is not None:
                         lock_path: Path = FileFinder.get_lock_path(json_path)
                         for lock_package in JsonParser.get_packages(lock_path.absolute()):
@@ -37,7 +37,7 @@ class PackageMatcher:
             lock_paths: List[Path] = FileFinder.get_file_paths(directory, "lock")
             for lock_path in lock_paths:
                 for lock_package in JsonParser.get_packages(lock_path.absolute()):
-                    yaml_package: Optional[Package] = Collection.get_single_by(yaml_packages, 'name', lock_package.name)
+                    yaml_package: Optional[Package] = Collection.get_single_by(yaml_packages, "name", lock_package.name)
                     if yaml_package is not None and lock_package.name == yaml_package.name:
                         matches.append(Match(lock_path.resolve(), yaml_package, lock_package))
         return matches
