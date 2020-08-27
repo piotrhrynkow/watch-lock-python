@@ -1,8 +1,8 @@
-from classes.console import Console
+from classes.console.console import Console
 from classes.option.abstract_option import AbstractOption
 from classes.table import Table
-from model.match import Match
-from typing import List
+from classes.package_matcher.match import Match
+from typing import Iterator, List
 
 
 class OptionSearch(AbstractOption):
@@ -12,7 +12,7 @@ class OptionSearch(AbstractOption):
         value_type: List[str] = ["source", "reference"]
         matches: List[Match] = self.get_matches(self.args.config)
         if not self.args.all:
-            matches: List[Match] = self.get_not_equal(matches, value_type)
+            matches: Iterator[Match] = filter(lambda match: not match.is_equal(value_type), matches)
         for match in matches:
             is_equal: bool = match.is_equal(value_type)
             value_x: str = match.package_x.get_value(value_type)

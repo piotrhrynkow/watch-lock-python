@@ -1,4 +1,4 @@
-from classes.console import Console
+from classes.console.console import Console
 from classes.option.fetch import OptionFetch
 from classes.option.option_interface import OptionInterface
 from classes.option.replace import OptionReplace

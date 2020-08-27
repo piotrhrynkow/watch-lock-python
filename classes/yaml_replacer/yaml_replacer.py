@@ -1,7 +1,7 @@
 from classes.github.client import Client
 from classes.yaml_parser import YamlParser
 from classes.yaml_replacer.result import Result
-from model.package import Package
+from classes.model.package import Package
 from typing import Any, List, Optional
 
 

@@ -1,4 +1,4 @@
-from model.package import Package
+from classes.model.package import Package
 from pathlib import Path
 from typing import List
 

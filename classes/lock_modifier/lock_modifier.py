@@ -1,8 +1,8 @@
-from classes.date_formater import DateFormater
+from classes.util.date_formater import DateFormater
 from classes.lock_modifier.result import Result
 from classes.lock_replacer import LockReplacer
 from classes.yaml_parser import YamlParser
-from model.match import Match
+from classes.package_matcher.match import Match
 from pathlib import Path
 from typing import IO, List, Optional
 

@@ -6,7 +6,7 @@ directories:
 - path\to\directory\*
 packages:
   package-name:
-    repository: owner/project
     branch: name
+    repository: owner/project
     source:
       reference: hash

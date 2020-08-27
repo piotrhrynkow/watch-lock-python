@@ -1,11 +1,11 @@
-from classes.console import Console
+from classes.console.console import Console
 from classes.github.client import Auth, Client
-from classes.matcher import Matcher
+from classes.package_matcher.package_matcher import PackageMatcher
 from classes.option.option_interface import OptionInterface
 from classes.yaml_parser import YamlParser
-from model.match import Match
-from model.package_collection import Collection
-from typing import Any, List
+from classes.package_matcher.match import Match
+from classes.model.package import Package
+from typing import Any, List, Iterator
 
 
 class AbstractOption(OptionInterface):
@@ -18,22 +18,11 @@ class AbstractOption(OptionInterface):
 
     @staticmethod
     def get_matches(config: str, json: bool = False) -> List[Match]:
-        return Matcher.get_json_matches(config) if json else Matcher.get_lock_matches(config)
+        return PackageMatcher.get_json_matches(config) if json else PackageMatcher.get_lock_matches(config)
 
-    @staticmethod
-    def get_not_equal(matches: List[Match], fields: List[str]) -> List[Match]:
-        filtered: List[Match] = []
-        for match in matches:
-            if not match.is_equal(fields):
-                filtered.append(match)
-        return filtered
-
-    def get_package_names(self) -> List[str]:
-        packages: Collection = self.yaml_parser.get_packages()
-        package_names: List[str] = []
-        for package in packages:
-            package_names.append(package.name)
-        return package_names
+    def get_package_names(self) -> Iterator[str]:
+        packages: List[Package] = self.yaml_parser.get_packages()
+        return map(lambda package: package.name, packages)
 
     def get_client(self) -> Client:
         auth: Auth = Auth()

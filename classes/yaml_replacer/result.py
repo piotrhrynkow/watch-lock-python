@@ -20,12 +20,6 @@ class Result:
     def set_sha_after(self, sha: str):
         self.sha_after = sha
 
-    def is_success(self) -> bool:
-        return self.STATUS_SUCCESS == self.status
-
-    def is_failed(self) -> bool:
-        return self.STATUS_FAILED == self.status
-
     def set_success(self):
         self.status = self.STATUS_SUCCESS
 

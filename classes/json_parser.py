@@ -1,8 +1,7 @@
 import json
 from pathlib import Path
 from typing import List
-from model.package import Package
-from model.package_collection import Collection
+from classes.model.package import Package
 
 
 class JsonParser:
@@ -19,8 +18,8 @@ class JsonParser:
         return names
 
     @staticmethod
-    def get_packages(path: Path) -> Collection:
-        packages = Collection()
+    def get_packages(path: Path) -> List[Package]:
+        packages: List[Package] = []
         data = JsonParser.get_data(path)
         packages_data = []
         groups = ["packages", "packages-dev"]
@@ -28,7 +27,7 @@ class JsonParser:
             if group in data:
                 packages_data += data[group]
         for package in packages_data:
-            packages.add(Package(package["name"], package))
+            packages.append(Package(package["name"], package))
         return packages
 
     @staticmethod

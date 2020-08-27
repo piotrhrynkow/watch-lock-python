@@ -1,8 +1,8 @@
 import argparse
-from classes.abstract_console import AbstractConsole
-from classes.console_theme import QuestionTheme
+from classes.console.abstract_console import AbstractConsole
+from classes.console.console_theme import QuestionTheme
 from inquirer import Checkbox, prompt
-from typing import List, Any
+from typing import Any, Iterator, List
 
 
 class Console(AbstractConsole):
@@ -37,7 +37,7 @@ class Console(AbstractConsole):
             self.args = self.parser.parse_args()
         return self.args
 
-    def select_packages(self, choices: List[Any]) -> List[Any]:
+    def select_packages(self, choices: Iterator[Any]) -> List[Any]:
         questions: List[Checkbox] = []
         checkbox: Checkbox = Checkbox(
             "packages",

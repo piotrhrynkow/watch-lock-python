@@ -1,5 +1,5 @@
-from model.package import Package
-from model.package_collection import Collection
+from classes.model.package import Package
+from classes.util.tree import Tree
 from pathlib import Path
 from typing import Any, List, Optional, Union
 import yaml
@@ -18,7 +18,7 @@ class YamlParser:
         if not file_path.is_file():
             raise Exception("Path \"{}\" is not file".format(file_path.resolve()))
 
-    def get_data(self):
+    def get_data(self) -> Any:
         if self.data is None:
             self.__valid_path()
             file_path = Path(self.path)
@@ -31,27 +31,19 @@ class YamlParser:
         data = self.get_data()
         return data["directories"]
 
-    def get_packages(self) -> Collection:
-        packages = Collection()
+    def get_packages(self) -> List[Package]:
+        packages: List[Package] = []
         data = self.get_data()
         for name, values in data["packages"].items():
-            packages.add(Package(name, values))
+            packages.append(Package(name, values))
         return packages
 
-    def get_value(self, props: Union[str, List[str]]):
-        if isinstance(props, str):
-            props = [props]
-        value = self.get_data()
-        try:
-            for field in props:
-                value = value[field]
-            return value
-        except KeyError:
-            return None
+    def get_value(self, keys: Union[str, List[str]]):
+        return Tree.get_value(self.get_data(), keys)
 
     def get_repositories(self) -> List[str]:
         repositories: List[str] = []
-        packages: Collection = self.get_packages()
+        packages: List[Package] = self.get_packages()
         for package in packages:
             repositories.append(package.repository)
         return repositories

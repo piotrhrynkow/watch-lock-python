@@ -14,12 +14,6 @@ class Result:
         self.directory: Optional[str] = None
         self.message: Optional[str] = None
 
-    def is_success(self) -> bool:
-        return self.STATUS_SUCCESS == self.status
-
-    def is_failed(self) -> bool:
-        return self.STATUS_FAILED == self.status
-
     def set_success(self):
         self.status = self.STATUS_SUCCESS
 

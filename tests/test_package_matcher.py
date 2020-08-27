@@ -1,10 +1,10 @@
-from classes.matcher import Matcher
-from model.match import Match
+from classes.package_matcher.package_matcher import PackageMatcher
+from classes.package_matcher.match import Match
 from typing import List
 
 
 def test_json_matches():
-    matches: List[Match] = Matcher.get_json_matches("tests/data/config.yaml")
+    matches: List[Match] = PackageMatcher.get_json_matches("tests/data/config.yaml")
     x_match_names: List[str] = []
     y_match_names: List[str] = []
     x_match_hashes: List[str] = []
@@ -22,7 +22,7 @@ def test_json_matches():
 
 
 def test_lock_matches():
-    matches: List[Match] = Matcher.get_lock_matches("tests/data/config.yaml")
+    matches: List[Match] = PackageMatcher.get_lock_matches("tests/data/config.yaml")
     x_match_names: List[str] = []
     y_match_names: List[str] = []
     x_match_hashes: List[str] = []

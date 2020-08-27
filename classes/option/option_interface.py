@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from classes.console import Console
+from classes.console.console import Console
 from classes.yaml_parser import YamlParser
 
 
