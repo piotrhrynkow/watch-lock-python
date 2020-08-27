@@ -1,8 +1,8 @@
 import argparse
 from classes.console.abstract_console import AbstractConsole
 from classes.console.console_theme import QuestionTheme
-from inquirer import Checkbox, prompt
-from typing import Any, Iterator, List
+from inquirer import Checkbox, List as Radio, prompt
+from typing import Any, Dict, Iterator, List, Optional
 
 
 class Console(AbstractConsole):
@@ -45,5 +45,16 @@ class Console(AbstractConsole):
             choices=choices
         )
         questions.append(checkbox)
-        answers = prompt(questions, theme=QuestionTheme())
+        answers: Dict[str] = prompt(questions, theme=QuestionTheme())
         return answers["packages"] if answers and "packages" in answers else []
+
+    def confirm_binary(self, message: str) -> Optional[bool]:
+        questions: List[Radio] = []
+        radio: Radio = Radio(
+            "confirmation",
+            message=message,
+            choices=[("Yes", True), ("No", False)],
+        )
+        questions.append(radio)
+        answers: Dict[str] = prompt(questions, theme=QuestionTheme())
+        return answers["confirmation"] if answers and "confirmation" in answers else None

@@ -18,3 +18,11 @@ class Collection:
     @staticmethod
     def __get_value(item: Any, property: str) -> Any:
         return item[property] if isinstance(item, Dict) else getattr(item, property)
+
+    @staticmethod
+    def get_unique(collection: Union[Iterator[Any], List[Any]]) -> List[Any]:
+        filtered: List[Any] = []
+        for item in collection:
+            if item not in filtered:
+                filtered.append(item)
+        return filtered

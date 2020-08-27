@@ -8,6 +8,7 @@ class Match:
     def __init__(self, file_path: Path, package_x: Package, package_y: Package):
         self.lock_path: Path = file_path
         self.directory_path: Path = file_path.parent
+        self.package_name: str = package_x.name
         self.package_x: Package = package_x
         self.package_y: Package = package_y
 
