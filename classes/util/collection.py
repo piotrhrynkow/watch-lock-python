@@ -12,7 +12,7 @@ class Collection:
         return Collection.filter_single(collection, lambda item: Collection.__get_value(item, property) == value)
 
     @staticmethod
-    def get_values(collection: List[Any], property: str) -> Iterator:
+    def get_values(collection: List[Any], property: str) -> Iterator[Any]:
         return map(lambda item: Collection.__get_value(item, property), collection)
 
     @staticmethod
