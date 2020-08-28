@@ -8,9 +8,9 @@ class JsonParser:
 
     @staticmethod
     def get_names(path: Path) -> List[str]:
-        names = []
-        data = JsonParser.get_data(path)
-        groups = ["require", "require-dev"]
+        names: List[str] = []
+        data: Any = JsonParser.get_data(path)
+        groups: List[str] = ["require", "require-dev"]
         for group in groups:
             if group in data:
                 for name in data[group]:
@@ -20,9 +20,9 @@ class JsonParser:
     @staticmethod
     def get_packages(path: Path) -> List[Package]:
         packages: List[Package] = []
-        data = JsonParser.get_data(path)
-        packages_data = []
-        groups = ["packages", "packages-dev"]
+        data: Any = JsonParser.get_data(path)
+        packages_data: List[Any] = []
+        groups: List[str] = ["packages", "packages-dev"]
         for group in groups:
             if group in data:
                 packages_data += data[group]
