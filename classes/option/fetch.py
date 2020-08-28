@@ -2,7 +2,6 @@ from classes.console.console import Console
 from classes.github.client import Client
 from classes.option.abstract_option import AbstractOption
 from classes.table import Table
-from classes.util.collection import Collection
 from classes.yaml_replacer.result import Result as YamlResult
 from classes.yaml_replacer.yaml_replacer import YamlReplacer
 from classes.model.package import Package
@@ -13,8 +12,8 @@ class OptionFetch(AbstractOption):
 
     def run(self) -> None:
         packages: List[Package] = self.yaml_parser.get_packages()
-        selected_packages: List[str] = self.console.select_packages(self.get_package_names())
-        filtered_packages: List[Package] = Collection.get_single_by(packages, "name", selected_packages)
+        selected_packages: List[str] = self.console.select_packages(list(self.get_package_names()))
+        filtered_packages: List[Package] = list(filter(lambda package: package.name in selected_packages, packages))
         if not filtered_packages:
             print(Console.warning("No selected packages, abort"))
         else:
