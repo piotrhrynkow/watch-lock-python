@@ -1,7 +1,8 @@
-auth:
+api:
   token: ~
   login: ~
   password: ~
+  url: ~
 directories:
 - path\to\directory\*
 packages:

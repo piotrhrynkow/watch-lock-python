@@ -25,6 +25,5 @@ class AbstractOption(OptionInterface):
         return map(lambda package: package.name, packages)
 
     def get_client(self) -> Client:
-        auth: Auth = Auth()
-        auth.parse_yaml(self.yaml_parser)
+        auth: Auth = Auth(self.yaml_parser)
         return Client(auth)

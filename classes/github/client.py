@@ -1,37 +1,49 @@
 from classes.yaml_parser import YamlParser
 from github import Branch, Commit, Github, Repository
-from typing import List, Optional
+from typing import Dict, Optional
 
 
 class Auth:
 
-    def __init__(self):
+    def __init__(self, yaml_parser: YamlParser):
         self.login: Optional[str] = None
         self.password: Optional[str] = None
         self.token: Optional[str] = None
+        if yaml_parser.get_token():
+            self.token = yaml_parser.get_token()
+        if yaml_parser.get_login() and yaml_parser.get_password():
+            self.login = yaml_parser.get_login()
+            self.password = yaml_parser.get_password()
 
-    def parse_yaml(self, yaml: YamlParser):
-        if yaml.get_token():
-            self.token = yaml.get_token()
-        if yaml.get_login() and yaml.get_password():
-            self.login = yaml.get_login()
-            self.password = yaml.get_password()
+    def get_props(self) -> Dict[str, str]:
+        props: Dict[str, str] = {}
+        if self.login and self.password:
+            props["login_or_token"] = self.login
+            props["password"] = self.password
+        elif self.token:
+            props["login_or_token"] = self.token
+        return props
 
-    def set_token(self, token: str):
-        self.token = token
 
-    def set_login(self, login: str, password: str):
-        self.login = login
-        self.password = password
+class Config:
 
-    def get_props(self) -> List[str]:
-        return [self.token] if self.token is not None else [self.login, self.password]
+    def __init__(self, yaml_parser: YamlParser):
+        self.auth: Auth = Auth(yaml_parser)
+        self.url: Optional[str] = None
+        if yaml_parser.get_url():
+            self.url = yaml_parser.get_url()
+
+    def get_props(self) -> Dict[str, str]:
+        props: Dict[str, str] = self.auth.get_props()
+        if self.url:
+            props["base_url"] = self.url
+        return props
 
 
 class Client:
 
     def __init__(self, auth: Auth):
-        self.github: Github = Github(*auth.get_props())
+        self.github: Github = Github(**auth.get_props())
 
     def get_client(self) -> Github:
         return self.github
