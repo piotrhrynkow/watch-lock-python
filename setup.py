@@ -9,7 +9,9 @@ from setuptools import setup
 
 APP = ['main.py']
 DATA_FILES = []
-OPTIONS = {}
+OPTIONS = {
+    "excludes": "tests"
+}
 
 setup(
     app=APP,
