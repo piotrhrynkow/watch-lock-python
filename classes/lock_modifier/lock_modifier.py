@@ -4,18 +4,18 @@ from classes.lock_replacer import LockReplacer
 from classes.yaml_parser import YamlParser
 from classes.package_matcher.match import Match
 from pathlib import Path
-from typing import IO, List, Optional
+from typing import Any, IO, List, Optional
 
 
 class LockModifier:
 
     def __init__(self, config_path: str):
-        self.yaml_parser = YamlParser(config_path)
+        self.yaml_parser: YamlParser = YamlParser(config_path)
 
-    def update_package(self, match: Match, fiels: List[str]) -> Result:
+    def update_package(self, match: Match, fields: List[str]) -> Result:
         lock_path: Path = match.lock_path
         package: str = match.package_name
-        sha: str = match.package_x.get_value(fiels)
+        sha: str = match.package_x.get_value(fields)
         result: Result = Result(package)
         stream: Optional[IO] = None
         try:
@@ -42,13 +42,13 @@ class LockModifier:
 
     def __save_content(self, stream: IO, content: str) -> int:
         stream.seek(0)
-        length = stream.write(content)
+        length: int = stream.write(content)
         stream.truncate()
         return length
 
     def __get_stream_with_data(self, path: Path) -> List:
-        stream = path.open("r+")
-        data = stream.read()
+        stream: IO = path.open("r+", encoding="utf8")
+        data: Any = stream.read()
         return [stream, data]
 
     def __close_stream(self, stream: Optional[IO]):

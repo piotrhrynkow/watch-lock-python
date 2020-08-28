@@ -1,7 +1,7 @@
+from classes.model.package import Package
 import json
 from pathlib import Path
-from typing import List
-from classes.model.package import Package
+from typing import Any, IO, List
 
 
 class JsonParser:
@@ -31,7 +31,8 @@ class JsonParser:
         return packages
 
     @staticmethod
-    def get_data(path: Path):
-        stream = path.open()
-        data = json.loads(stream.read())
+    def get_data(path: Path) -> Any:
+        stream: IO = path.open(encoding="utf8")
+        data: Any = json.loads(stream.read())
+        stream.close()
         return data
