@@ -14,12 +14,12 @@ if __name__ == '__main__':
     args: Any = console.get_args()
     yaml_parser: YamlParser = YamlParser(args.config)
 
-    if Console.OPTION_SEARCH == console.get_option():
-        option: OptionInterface = OptionSearch(console, yaml_parser)
+    if Console.OPTION_FETCH == console.get_option():
+        option: OptionInterface = OptionFetch(console, yaml_parser)
     elif Console.OPTION_REPLACE == console.get_option():
         option: OptionInterface = OptionReplace(console, yaml_parser)
-    elif Console.OPTION_FETCH == console.get_option():
-        option: OptionInterface = OptionFetch(console, yaml_parser)
+    elif Console.OPTION_SEARCH == console.get_option():
+        option: OptionInterface = OptionSearch(console, yaml_parser)
     else:
         print(Console.warning("Choose correct option, abort"))
         sys.exit()

@@ -21,7 +21,7 @@ class Console(AbstractConsole):
 
     def create_parser(self, has_help: bool) -> argparse.ArgumentParser:
         parser = argparse.ArgumentParser(description="Find wrong references in locks", add_help=has_help)
-        parser.add_argument("option", type=str, help="Option")
+        parser.add_argument("option", type=str, help="Available options: fetch, replace, search")
         parser.add_argument("-c", "--config", type=str, default="config.yaml", help="Config path")
         parser.add_argument("-j", "--json", action="store_true", help="Check if package exists in composer.json")
         return parser
